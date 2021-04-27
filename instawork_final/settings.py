@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,18 +26,40 @@ SECRET_KEY = 'django-insecure-ub)f!g5&xamg7&@u1zs!2_m=d-&(i1!fezo=^s9f%t(7r!8^uc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
+SWAGGER_SETTINGS = {
+   'DEFAULT_INFO': 'import.path.to.urls.api_info',
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',   
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ), 
+}
+
 INSTALLED_APPS = [
+    'team_management',
+    'rest_framework',
+    'drf_yasg',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
